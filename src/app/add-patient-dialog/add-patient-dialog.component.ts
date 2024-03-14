@@ -73,8 +73,12 @@ export class AddPatientDialogComponent implements OnInit{
       nextCheckupDate: this.nextCheckupDate,
       medicine: this.medicine,
     }
-
   }
+
+  checkAllInputs(){
+    return !!this.name && !!this.medicine && !!this.disease && !!this.initialCheckupDate && !!this.nextCheckupDate;
+  }
+
   cancel(){
     this.dialogRef.close();
   }

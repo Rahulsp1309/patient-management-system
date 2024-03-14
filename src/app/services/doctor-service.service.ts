@@ -13,6 +13,11 @@ import { Observable } from 'rxjs';
 })
 export class DoctorService {
   constructor(private http: HttpClient) { }
+ 
+  public getDoctorData(id : string): Observable<DoctorType> {
+    const url = 'http://localhost:8000/doctor/getDoctor/'+id;
+    return this.http.get<DoctorType>(url);
+  }
 
   public saveUser(user: DoctorType): Observable<DoctorType> {
     const url = 'http://localhost:8000/doctor/create-doctor';

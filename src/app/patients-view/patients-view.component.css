@@ -17,3 +17,7 @@
     background-color: #e0e0e0; /* Lighter gray background for header row */
   }
   
+.mat-elevation-z8{
+  width: 80%;
+  margin: 0 auto;
+}
