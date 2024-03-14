@@ -1,0 +1,67 @@
+<h2 mat-dialog-title>{{actionType}}</h2>
+<mat-dialog-content class="main-dialog">
+    <form class="signup-form">
+        <table class="signup-form-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="signup-full-width">
+                        <mat-label>Name</mat-label>
+                        <input matInput [(ngModel)]="name" name="name" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="signup-full-width">
+                        <mat-label>Disease</mat-label>
+                        <input matInput [(ngModel)]="disease" name="disease" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="signup-full-width">
+                        <mat-label>Medicine</mat-label>
+                        <input matInput [(ngModel)]="medicine" name="medicine" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="example-form-field">
+                        <mat-label>Initial Checkup Date</mat-label>
+                        <input matInput [matDatepicker]="nextdatepicker" [(ngModel)]="initialCheckupDate"
+                            name="initialCheckupDate" required>
+                        <mat-datepicker-toggle matIconSuffix [for]="nextdatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #nextdatepicker>
+                            <mat-datepicker-actions>
+                                <button mat-button class="dialog-button" matDatepickerCancel>Cancel</button>
+                                <button mat-raised class="dialog-button" matDatepickerApply>Apply</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="example-form-field">
+                        <mat-label>Initial Checkup Date</mat-label>
+                        <input matInput [matDatepicker]="datepicker" [(ngModel)]="nextCheckupDate"
+                            name="nextCheckupDate" required>
+                        <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker>
+                            <mat-datepicker-actions>
+                                <button mat-button class="dialog-button" matDatepickerCancel>Cancel</button>
+                                <button mat-raised class="dialog-button" matDatepickerApply>Apply</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" class="dialog-button" (click)="onClick()">{{actionType}}</button>
+    <button mat-raised-button color="accent" class="dialog-button" (click)="cancel()">Cancel</button>
+</mat-dialog-actions>

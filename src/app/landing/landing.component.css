@@ -1,0 +1,38 @@
+.mat-mdc-card-content:last-child {
+    height: 347px;
+    width: 650px;
+}
+
+.text{
+    padding: 300px;
+}
+
+.mat-mdc-card{
+    height: 280px;
+    width: 650px;
+}
+
+.action-card{
+    align-items: end;
+    padding-top: 25px;
+}
+
+.example-card{
+   background-color: lightgray;
+}
+.example-full-width{
+    width: 600px;
+}
+
+.button-action{
+    padding-left: 350px;
+}
+
+.h-screen{
+    height: 92vh;
+}
+
+.mb-4{
+    padding-left: 700px;
+    
+}

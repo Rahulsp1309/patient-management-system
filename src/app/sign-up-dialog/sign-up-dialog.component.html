@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Signup</h2>
+<mat-dialog-content class="main-dialog">
+    <form class="signup-form">
+        <table class="signup-form-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="signup-full-width">
+                        <input matInput placeholder="Username" [(ngModel)]="userName" name="username" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="signup-full-width">
+                        <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="signup-full-width">
+                        <input matInput placeholder="Name" [(ngModel)]="name" name="name" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="signup-full-width">
+                        <input matInput placeholder="specialization" [(ngModel)]="speciality" name="speciality"  required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="signup-full-width">
+                        <input matInput placeholder="Experience" [(ngModel)]="experience" name="experience" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" class="dialog-button" (click)="onClick()">Signup</button>
+    <button mat-raised-button color="accent" class="dialog-button" (click)="cancel()">Cancel</button>
+</mat-dialog-actions>
