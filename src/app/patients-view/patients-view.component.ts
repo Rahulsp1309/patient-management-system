@@ -12,7 +12,7 @@ import { PatientService } from '../services/patient-service.service';
   styleUrls: ['./patients-view.component.css']
 })
 export class PatientsViewComponent implements OnInit  {
-  doctorId!: string;
+    doctorId!: string;
   patientsList!: PatientType[];
   displayedColumns: string[] = ['name', 'disease', 'medicine', 'initialCheckupDate', 'nextCheckupDate','edit'];
 
