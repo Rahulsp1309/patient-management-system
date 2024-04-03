@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./sign-up-dialog.component.css']
 })
 export class SignUpDialogComponent {
-  userName!: string;
+  email!: string;
   password!: string;
   name!: string;
   speciality!: string;
@@ -35,7 +35,7 @@ export class SignUpDialogComponent {
         }
         else {
           this.createRequestObject();
-          this.doctorService.saveUser(this.doctorRequestObject).subscribe((response: any) => {
+          this.doctorService.registerDoctor(this.doctorRequestObject).subscribe((response: any) => {
             this.dialogRef.close();
 
           });
@@ -52,7 +52,7 @@ export class SignUpDialogComponent {
   createRequestObject(): DoctorType {
     this.doctorRequestObject = {
       name: this.name,
-      userName: this.userName,
+      email: this.email,
       password: this.password,
       speciality: this.speciality,
       experience: this.experience,
@@ -62,7 +62,7 @@ export class SignUpDialogComponent {
   }
 
   async checkIfAlreadyExists(): Promise<Observable<Boolean>> {
-    return await this.doctorService.checkUserName(this.userName);
+    return await this.doctorService.checkUserName(this.email);
   }
 
 }

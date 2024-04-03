@@ -8,7 +8,7 @@ import { PatientType } from '../data-structure/patient-type';
   templateUrl: './add-patient-dialog.component.html',
   styleUrls: ['./add-patient-dialog.component.css']
 })
-export class AddPatientDialogComponent implements OnInit{
+export class AddPatientDialogComponent implements OnInit {
   name!: string;
   disease!: string;
   medicine!: string;
@@ -21,51 +21,56 @@ export class AddPatientDialogComponent implements OnInit{
 
   constructor(
     public dialogRef: MatDialogRef<AddPatientDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {id: Number, type: string, patId : string},
+    @Inject(MAT_DIALOG_DATA) public data: { id: Number, type: string, patId: string },
     public patientService: PatientService) {
-      this.patientObj= {} as PatientType;
-      this.docId = data.id;
-      this.actionType = data.type;
-      this.patientId = data.patId;
+    this.patientObj = {} as PatientType;
+    this.docId = data.id;
+    this.actionType = data.type;
+    this.patientId = data.patId;
   }
 
   ngOnInit(): void {
-
-      if(this.patientId){
-        this.patientService.getPatientById(this.patientId).subscribe((res: PatientType)=>{
-            this.name = res.name;
-            this.medicine = res.medicine;
-            this.disease = res.disease;
-            this.initialCheckupDate = res.initialCheckupDate;
-            this.nextCheckupDate = res.nextCheckupDate;
-        });
-      }
+    this.loadPatientData();
+ 
   }
 
-  formatDate(date: Date): string{
+  loadPatientData(){
+    if (this.patientId) {
+      this.patientService.getPatientById(this.patientId).subscribe((res: PatientType) => {
+        this.name = res.name;
+        this.medicine = res.medicine;
+        this.disease = res.disease;
+        this.initialCheckupDate = res.initialCheckupDate;
+        this.nextCheckupDate = res.nextCheckupDate;
+      });
+    }
+  }
+
+  formatDate(date: Date): string {
     return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
   }
 
   onClick() {
-    if(this.actionType === 'Add'){
+    if (this.actionType === 'Add') {
       this.createPatientRequestObject();
-      this.patientService.savePatient(this.patientObj, this.docId).subscribe((response: any)=>{
+      this.patientService.savePatient(this.patientObj, this.docId).subscribe((response: any) => {
         this.dialogRef.close();
       })
     }
 
-    if(this.actionType === 'Edit'){
+    if (this.actionType === 'Edit') {
       this.createPatientRequestObject();
-      this.patientService.updatePatientById(this.patientObj, this.patientId).subscribe((response: any)=>{
+      this.patientService.updatePatientById(this.patientObj, this.patientId).subscribe((response: any) => {
         this.dialogRef.close();
+        this.loadPatientData();
       })
 
     }
-    
-   }
 
-  
-  createPatientRequestObject(){
+  }
+
+
+  createPatientRequestObject() {
     this.patientObj = {
       name: this.name,
       disease: this.disease,
@@ -75,11 +80,11 @@ export class AddPatientDialogComponent implements OnInit{
     }
   }
 
-  checkAllInputs(){
+  checkAllInputs() {
     return !!this.name && !!this.medicine && !!this.disease && !!this.initialCheckupDate && !!this.nextCheckupDate;
   }
 
-  cancel(){
+  cancel() {
     this.dialogRef.close();
   }
 

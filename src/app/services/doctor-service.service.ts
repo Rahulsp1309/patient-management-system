@@ -7,6 +7,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthResponseObj } from '../data-structure/AuthObjects';
 
 @Injectable({
   providedIn: 'root'
@@ -19,18 +20,13 @@ export class DoctorService {
     return this.http.get<DoctorType>(url);
   }
 
-  public saveUser(user: DoctorType): Observable<DoctorType> {
-    const url = 'http://localhost:8000/doctor/create-doctor';
-    return this.http.post<DoctorType>(url, user);
+  public registerDoctor(user: DoctorType): Observable<AuthResponseObj> {
+    const url = 'http://localhost:8000/api/auth/register';
+    return this.http.post<AuthResponseObj>(url, user);
   }
 
-  public checkUser(userName: string, password: string): Observable<BigInteger> {
-    const url = 'http://localhost:8000/doctor/checkCredentials/' + userName + `/${password}`;
-    return this.http.get<BigInteger>(url);
-  }
-
-  public checkUserName(userName: string): Observable<Boolean> {
-    const url = 'http://localhost:8000/doctor/checkUserName/' + userName;
+  public checkUserName(email: string): Observable<Boolean> {
+    const url = 'http://localhost:8000/api/doctor/check-username/' + email;
     return this.http.get<Boolean>(url);
   }
 

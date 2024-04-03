@@ -13,7 +13,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatGridListModule} from '@angular/material/grid-list';
 import { SignUpDialogComponent } from './sign-up-dialog/sign-up-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PatientsViewComponent } from './patients-view/patients-view.component';
 import { AddPatientDialogComponent } from './add-patient-dialog/add-patient-dialog.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -23,6 +23,9 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { HeaderComponent } from './header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AuthInterceptor } from './services/auth-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -50,10 +53,14 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatPaginatorModule,
+    MatCheckboxModule
 
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
