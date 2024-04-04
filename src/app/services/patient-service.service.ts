@@ -27,12 +27,12 @@ export class PatientService {
   }
 
   public getPatientById(id: string): Observable<PatientType>{
-    const url = 'http://localhost:8000/patient/getById/'+id;
+    const url = 'http://localhost:8000/api/patient/getById/'+id;
     return this.http.get<any>(url);
   }
 
   public updatePatientById(patient: PatientType , id : string): Observable<PatientType>{
-    const url = 'http://localhost:8000/patient/update/' + id ;
+    const url = 'http://localhost:8000/api/patient/update/' + id ;
     return this.http.put<any>(url, patient);
   }
 

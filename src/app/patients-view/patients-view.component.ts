@@ -43,13 +43,18 @@ export class PatientsViewComponent implements OnInit, AfterViewInit{
       this.doctorId = params['doctorId'];
       console.log('Doctor ID:', this.doctorId);
     });
+   this.getDoctorData(); 
   this.getPatientData();
   }
-
+ 
+  getDoctorData() {
+    this.doctorService.getDoctorData(this.doctorId).subscribe((res: DoctorType)=>{
+      this.doctorName = res.name;
+    })
+  }
 
   getPatientData(){
     this.patientService.getPatientsByDocId(this.doctorId, this.pageIndex, this.pageSize).subscribe((res: PatientApiResponse)=>{
-      this.doctorName = res?.patients[0].doctor?.name as string;
         this.patientsList.data = res.patients;
         this.totalItems = res.count;
       })
@@ -66,6 +71,7 @@ export class PatientsViewComponent implements OnInit, AfterViewInit{
   }
 
   openEditDialog(id : string){
+    console.log("id from edit", id);
     const dialogRef = this.dialog.open(AddPatientDialogComponent, {
       data: {id: this.doctorId, type: "Edit", patId: id},
     });
@@ -89,5 +95,11 @@ export class PatientsViewComponent implements OnInit, AfterViewInit{
   isAllSelected() {
     return this.selection.selected.length === this.patientsList.data.length;
   }
-
+  
+  sendEmail() {
+    console.log("send mail called");
+    this.doctorService.sendEmail(this.doctorId).subscribe((res)=>{
+      alert("Mails Sent Successfully!!");
+    });
+   }
 }

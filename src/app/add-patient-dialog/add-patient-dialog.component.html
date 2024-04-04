@@ -13,6 +13,14 @@
             <tr>
                 <td>
                     <mat-form-field class="signup-full-width">
+                        <mat-label>Email</mat-label>
+                        <input matInput [(ngModel)]="email" name="email" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="signup-full-width">
                         <mat-label>Disease</mat-label>
                         <input matInput [(ngModel)]="disease" name="disease" required>
                     </mat-form-field>

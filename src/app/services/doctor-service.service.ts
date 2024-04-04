@@ -16,7 +16,7 @@ export class DoctorService {
   constructor(private http: HttpClient) { }
  
   public getDoctorData(id : string): Observable<DoctorType> {
-    const url = 'http://localhost:8000/doctor/getDoctor/'+id;
+    const url = 'http://localhost:8000/api/doctor/getDoctorById/'+id;
     return this.http.get<DoctorType>(url);
   }
 
@@ -28,6 +28,12 @@ export class DoctorService {
   public checkUserName(email: string): Observable<Boolean> {
     const url = 'http://localhost:8000/api/doctor/check-username/' + email;
     return this.http.get<Boolean>(url);
+  }
+
+  public sendEmail(id : string): Observable<void> {
+    console.log("mail service", id);
+    const url = 'http://localhost:8000/api/doctor/sendMailById/' + id;
+    return this.http.post<void>(url, null);
   }
 
 }

@@ -10,6 +10,7 @@ import { PatientType } from '../data-structure/patient-type';
 })
 export class AddPatientDialogComponent implements OnInit {
   name!: string;
+  email!: string;
   disease!: string;
   medicine!: string;
   initialCheckupDate!: Date;
@@ -73,6 +74,7 @@ export class AddPatientDialogComponent implements OnInit {
   createPatientRequestObject() {
     this.patientObj = {
       name: this.name,
+      email: this.email,
       disease: this.disease,
       initialCheckupDate: this.initialCheckupDate,
       nextCheckupDate: this.nextCheckupDate,

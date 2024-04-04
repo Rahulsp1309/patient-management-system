@@ -16,8 +16,8 @@ export class AuthService {
     return this.http.post<AuthResponseObj>(url,authReq);
   }
 
-  public setToken(token: string){
-    this.cookieService.set('jwtToken', token);
+  public setToken(token: string|null){
+    this.cookieService.set('jwtToken', String(token));
   }
 
   public getToken(){
@@ -31,6 +31,5 @@ export class AuthService {
   public isLoggedIn(){
     return !!this.getToken();
   }
-  
 
 }

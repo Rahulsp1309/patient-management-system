@@ -1,8 +1,10 @@
 <app-header [doctorName]="doctorName"></app-header>
 <section class="buttons flex justify-center items-center">
     <button mat-raised-button (click)="openAddDialog()">Add</button>
-
     <button mat-raised-button>Delete</button>
+    <button mat-raised-button  
+            matTooltip="Sends mail to patients whose checkup is due in 5 days"
+            (click)="sendEmail()">Send Reminders</button>
 </section>
 <br>
 <div class="mat-elevation-z8">

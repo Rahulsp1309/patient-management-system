@@ -26,6 +26,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AuthInterceptor } from './services/auth-interceptor.interceptor';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AuthInterceptor } from './services/auth-interceptor.interceptor';
     MatIconModule,
     MatToolbarModule,
     MatPaginatorModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTooltipModule
 
   ],
   providers: [
