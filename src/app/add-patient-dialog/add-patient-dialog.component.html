@@ -30,13 +30,25 @@
                 <td>
                     <mat-form-field class="signup-full-width">
                         <mat-label>Medicine</mat-label>
-                        <input matInput [(ngModel)]="medicine" name="medicine" required>
-                    </mat-form-field>
+                        <mat-chip-grid #chipGrid>
+                          <mat-chip-row *ngFor="let medicine of medicines" (removed)="removeChip(medicine)">
+                            {{medicine}}
+                            <button matChipRemove>
+                              <mat-icon>cancel</mat-icon>
+                            </button>
+                          </mat-chip-row>
+                        </mat-chip-grid>
+                        <input placeholder="Add medicine"
+                               [matChipInputFor]="chipGrid"
+                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                               [matChipInputAddOnBlur]="addOnBlur"
+                               (matChipInputTokenEnd)="addChip($event)"/>
+                      </mat-form-field>                      
                 </td>
             </tr>
             <tr>
                 <td>
-                    <mat-form-field class="example-form-field">
+                    <mat-form-field class="signup-full-width">
                         <mat-label>Initial Checkup Date</mat-label>
                         <input matInput [matDatepicker]="nextdatepicker" [(ngModel)]="initialCheckupDate"
                             name="initialCheckupDate" required>
@@ -52,7 +64,7 @@
             </tr>
             <tr>
                 <td>
-                    <mat-form-field class="example-form-field">
+                    <mat-form-field class="signup-full-width">
                         <mat-label>Next Checkup Date</mat-label>
                         <input matInput [matDatepicker]="datepicker" [(ngModel)]="nextCheckupDate"
                             name="nextCheckupDate" required>

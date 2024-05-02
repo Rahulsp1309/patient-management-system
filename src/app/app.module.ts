@@ -27,6 +27,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AuthInterceptor } from './services/auth-interceptor.interceptor';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatChipsModule} from '@angular/material/chips';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { AddPrescriptionDialogComponent } from './add-prescription-dialog/add-prescription-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     SignUpDialogComponent,
     PatientsViewComponent,
     AddPatientDialogComponent,
-    HeaderComponent
+    HeaderComponent,
+    SearchBarComponent,
+    AddPrescriptionDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +62,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatToolbarModule,
     MatPaginatorModule,
     MatCheckboxModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatChipsModule
 
   ],
   providers: [

@@ -1,7 +1,10 @@
 <p>
-    <mat-toolbar>
+    <mat-toolbar class="toolbar">
         <span>Doctor Buddy</span>
-        <span class="example-spacer"></span>
+        <span class="spacer"></span>
+        <span class="search-bar-container">
+            <app-search-bar></app-search-bar>
+        </span>
         <span>Dr. {{doctorName}}</span>
         <button mat-icon-button (click)="logOut()">
             <mat-icon>logout</mat-icon>

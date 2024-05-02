@@ -1,7 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PatientService } from '../services/patient-service.service';
 import { PatientType } from '../data-structure/patient-type';
+import {MatChipEditedEvent, MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-add-patient-dialog',
@@ -12,13 +15,17 @@ export class AddPatientDialogComponent implements OnInit {
   name!: string;
   email!: string;
   disease!: string;
-  medicine!: string;
   initialCheckupDate!: Date;
   nextCheckupDate!: Date;
   patientObj!: PatientType;
   docId!: Number;
   actionType!: string;
   patientId!: string;
+  medicines: string[]= [];
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+
+  announcer = inject(LiveAnnouncer);
 
   constructor(
     public dialogRef: MatDialogRef<AddPatientDialogComponent>,
@@ -32,14 +39,14 @@ export class AddPatientDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPatientData();
- 
   }
 
   loadPatientData(){
     if (this.patientId) {
       this.patientService.getPatientById(this.patientId).subscribe((res: PatientType) => {
         this.name = res.name;
-        this.medicine = res.medicine;
+        this.email = res.email;
+        this.medicines = res.medicine.split(",");
         this.disease = res.disease;
         this.initialCheckupDate = res.initialCheckupDate;
         this.nextCheckupDate = res.nextCheckupDate;
@@ -70,24 +77,41 @@ export class AddPatientDialogComponent implements OnInit {
 
   }
 
-
-  createPatientRequestObject() {
+ createPatientRequestObject() {
     this.patientObj = {
       name: this.name,
       email: this.email,
       disease: this.disease,
       initialCheckupDate: this.initialCheckupDate,
       nextCheckupDate: this.nextCheckupDate,
-      medicine: this.medicine,
+      medicine: this.medicines.toString()
     }
   }
 
   checkAllInputs() {
-    return !!this.name && !!this.medicine && !!this.disease && !!this.initialCheckupDate && !!this.nextCheckupDate;
+    return !!this.name &&  !!this.disease && !!this.initialCheckupDate && !!this.nextCheckupDate;
   }
 
   cancel() {
     this.dialogRef.close();
   }
 
+  addChip(event: MatChipInputEvent): void {
+    console.log("inside addchip")
+    const value = (event.value || '').trim();
+    if (value) {
+      this.medicines?.push(value);
+    }
+    event.chipInput!.clear();
+  }
+
+  removeChip(medicine: string): void {
+    const index = this.medicines.indexOf(medicine);
+
+    if (index >= 0) {
+      this.medicines.splice(index, 1);
+
+      this.announcer.announce(`Removed ${medicine}`);
+    }
+  }
 }

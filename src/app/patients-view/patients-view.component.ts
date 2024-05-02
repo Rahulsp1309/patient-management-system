@@ -13,6 +13,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { NumberInput } from '@angular/cdk/coercion';
 import { PatientApiResponse } from '../data-structure/PatientApiResponse';
 import { SelectionModel } from '@angular/cdk/collections';
+import { AddPrescriptionDialogComponent } from '../add-prescription-dialog/add-prescription-dialog.component';
 
 @Component({
   selector: 'app-patients-view',
@@ -24,11 +25,12 @@ export class PatientsViewComponent implements OnInit, AfterViewInit{
   doctorId!: string;
   displayedColumns: string[] = ['select','name', 'disease', 'medicine', 'initialCheckupDate', 'nextCheckupDate','edit'];
   patientsList = new MatTableDataSource<PatientType>([]);
-  pageSize = 5;
+  pageSize = 20;
   pageIndex = 0;
   totalItems = 0;
   queryParams: QueryParamType= {pageSize : 5 , pageIndex: 0};
   selection = new SelectionModel<PatientType>(true,[]);
+  medicines!: string[];
 
   @ViewChild('paginator') paginator!: MatPaginator;
   constructor(public route: ActivatedRoute, public dialog: MatDialog, public patientService: PatientService, public doctorService: DoctorService){
@@ -77,6 +79,28 @@ export class PatientsViewComponent implements OnInit, AfterViewInit{
     });
 
     dialogRef.afterClosed().subscribe(() => {
+      this.getPatientData();
+            console.log('The dialog was closed');
+    });
+  }
+
+  openPrescriptionDialog(id : string){
+
+    this.medicines = this.patientsList.data
+    .filter((patient: PatientType) => {
+        return String(patient.id) == id;
+    })
+    .flatMap((patient: PatientType) => {
+        return patient.medicine.split(",");
+    });
+
+    console.log("medicines array", this.medicines);
+    const dialogRef = this.dialog.open(AddPrescriptionDialogComponent, {
+      data: {medicines: this.medicines, patId: id},
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.getPatientData();
             console.log('The dialog was closed');
     });
   }

@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Prescription</h2>
+<mat-dialog-content class="main-dialog">
+    <form class="signup-form">
+        <table class="signup-form-width" cellspacing="0">
+            <tr *ngFor="let medicine of medicines; let i = index">
+                <td>
+                    <mat-chip disabled>{{medicine}}</mat-chip>
+                </td>
+                <td>
+                    <mat-form-field class="signup-full-width">
+                        <mat-label>Dosage</mat-label>
+                        <!-- Bind each input field to a unique variable based on the index -->
+                        <input matInput [(ngModel)]="dosages[i]" name="dosage" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" class="dialog-button" (click)="onClick()">Send</button>
+    <button mat-raised-button color="accent" class="dialog-button" (click)="cancel()">Cancel</button>
+</mat-dialog-actions>
+

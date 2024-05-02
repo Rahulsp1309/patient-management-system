@@ -8,6 +8,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthResponseObj } from '../data-structure/AuthObjects';
+import { PrescriptionRequest } from '../data-structure/PrescriptionRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,12 @@ export class DoctorService {
     console.log("mail service", id);
     const url = 'http://localhost:8000/api/doctor/sendMailById/' + id;
     return this.http.post<void>(url, null);
+  }
+
+  public sendPrescription(prescriptionObj : PrescriptionRequest): Observable<void>{
+    console.log("inside doctor service", prescriptionObj);
+    const url = 'http://localhost:8000/api/doctor/sendMailWithPrescription';
+    return this.http.post<void>(url, prescriptionObj);
   }
 
 }
