@@ -3,16 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthRequestObj, AuthResponseObj } from '../data-structure/AuthObjects';
+import {DEV_HOST_URL, LOCAL_HOST_URL} from './api-urls';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  //todo- make it dynamic 
+  currURL = DEV_HOST_URL;
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   public login(authReq : AuthRequestObj): Observable<AuthResponseObj> {
-    const url = 'http://localhost:8000/api/auth/authenticate';
+    const url = this.currURL+'/api/auth/authenticate';
     return this.http.post<AuthResponseObj>(url,authReq);
   }
 

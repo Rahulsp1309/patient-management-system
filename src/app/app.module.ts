@@ -30,6 +30,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatChipsModule} from '@angular/material/chips';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { AddPrescriptionDialogComponent } from './add-prescription-dialog/add-prescription-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { AddPrescriptionDialogComponent } from './add-prescription-dialog/add-pr
     MatPaginatorModule,
     MatCheckboxModule,
     MatTooltipModule,
-    MatChipsModule
+    MatChipsModule,
+    ReactiveFormsModule
 
   ],
   providers: [
