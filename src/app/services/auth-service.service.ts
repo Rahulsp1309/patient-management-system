@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthRequestObj, AuthResponseObj } from '../data-structure/AuthObjects';
-import {DEV_HOST_URL, LOCAL_HOST_URL} from './api-urls';
+import {DEV_HOST_URL, LOCAL_HOST_URL, DEV_HOST_AZURE_URL} from './api-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ import {DEV_HOST_URL, LOCAL_HOST_URL} from './api-urls';
 export class AuthService {
 
   //todo- make it dynamic 
-  currURL = DEV_HOST_URL;
+  currURL = DEV_HOST_AZURE_URL;
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   public login(authReq : AuthRequestObj): Observable<AuthResponseObj> {

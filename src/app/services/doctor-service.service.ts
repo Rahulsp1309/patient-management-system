@@ -9,13 +9,13 @@ import {
 import { Observable } from 'rxjs';
 import { AuthResponseObj } from '../data-structure/AuthObjects';
 import { PrescriptionRequest } from '../data-structure/PrescriptionRequest';
-import {DEV_HOST_URL, LOCAL_HOST_URL} from './api-urls';
+import {DEV_HOST_URL, LOCAL_HOST_URL, DEV_HOST_AZURE_URL} from './api-urls';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DoctorService {
-  currURL = DEV_HOST_URL;
+  currURL = LOCAL_HOST_URL;
   constructor(private http: HttpClient) { }
  
   public getDoctorData(id : string): Observable<DoctorType> {
