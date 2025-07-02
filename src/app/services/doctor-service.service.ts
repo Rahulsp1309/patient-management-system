@@ -15,7 +15,7 @@ import {DEV_HOST_URL, LOCAL_HOST_URL, DEV_HOST_AZURE_URL} from './api-urls';
   providedIn: 'root'
 })
 export class DoctorService {
-  currURL = LOCAL_HOST_URL;
+  currURL = DEV_HOST_AZURE_URL;
   constructor(private http: HttpClient) { }
  
   public getDoctorData(id : string): Observable<DoctorType> {
