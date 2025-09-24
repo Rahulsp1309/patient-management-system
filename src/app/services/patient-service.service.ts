@@ -14,7 +14,7 @@ import {DEV_HOST_URL, LOCAL_HOST_URL, DEV_HOST_AZURE_URL} from './api-urls';
   providedIn: 'root'
 })
 export class PatientService {
-  currURL = DEV_HOST_AZURE_URL;
+  currURL = DEV_HOST_URL;
   constructor(private http: HttpClient) { }
 
   public savePatient(patient: PatientType, id: Number): Observable<PatientType> {
